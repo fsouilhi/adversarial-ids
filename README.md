@@ -15,7 +15,7 @@ Un perceptron multi-couches (MLP) est entraîné sur le jeu de données **NSL-KD
 
 ## Démo interactive
 
-> **[Lancer la démo Streamlit](#)** ← lien de déploiement à ajouter
+> **[Lancer la démo Streamlit](https://adversarial-ids-gya5wtwnntqdkelbnrgvch.streamlit.app)** ← lien de déploiement à ajouter
 
 La démo permet de visualiser en temps réel l'effet des perturbations adversariales sur les prédictions du modèle et de comparer les défenses.
 
