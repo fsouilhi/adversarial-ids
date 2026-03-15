@@ -50,6 +50,11 @@ st.markdown("""
         border-left: 3px solid #34d399;
     }
     section[data-testid="stSidebar"] { background: #0f172a; }
+    section[data-testid="stSidebar"] * { color: #e2e8f0 !important; }
+    section[data-testid="stSidebar"] label { color: #f1f5f9 !important; font-weight: 500; }
+    section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h3 { color: #f1f5f9 !important; font-weight: 700; }
+    section[data-testid="stSidebar"] [data-baseweb="select"] { background: #1e293b !important; }
+    section[data-testid="stSidebar"] [data-baseweb="select"] * { color: #f1f5f9 !important; }
 </style>
 """, unsafe_allow_html=True)
 
