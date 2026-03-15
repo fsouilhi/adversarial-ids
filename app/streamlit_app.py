@@ -43,20 +43,22 @@ st.markdown("""
         padding: 1rem 1.2rem;
         border-left: 3px solid #f87171;
     }
+    .attack-card h3 { margin: 0; font-size: 0.8rem; color: #94a3b8; letter-spacing: 0.05em; }
+    .attack-card p  { margin: 0.2rem 0 0; font-size: 1.6rem; font-weight: 700; color: #f1f5f9; }
     .defense-card {
         background: #1e293b;
         border-radius: 8px;
         padding: 1rem 1.2rem;
         border-left: 3px solid #34d399;
     }
+    .defense-card h3 { margin: 0; font-size: 0.8rem; color: #94a3b8; letter-spacing: 0.05em; }
+    .defense-card p  { margin: 0.2rem 0 0; font-size: 1.6rem; font-weight: 700; color: #f1f5f9; }
     section[data-testid="stSidebar"] { background: #0f172a; }
     section[data-testid="stSidebar"] * { color: #e2e8f0 !important; }
     section[data-testid="stSidebar"] label { color: #f1f5f9 !important; font-weight: 500; }
     section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h3 { color: #f1f5f9 !important; font-weight: 700; }
     section[data-testid="stSidebar"] [data-baseweb="select"] { background: #1e293b !important; }
-    section[data-testid="stSidebar"] [data-baseweb="select"] * { color: #1e293b !important; }
-    section[data-testid="stSidebar"] [data-baseweb="select"] [data-testid="stMarkdownContainer"] * { color: #1e293b !important; }
-    section[data-testid="stSidebar"] div[role="listbox"] * { color: #1e293b !important; }
+    section[data-testid="stSidebar"] [data-baseweb="select"] * { color: #f1f5f9 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -301,14 +303,12 @@ st.divider()
 
 if lancer:
     with st.spinner("Génération des exemples adversariaux…"):
-        # Génération de l'attaque
         modele.eval()
         if type_attaque == "FGSM":
             X_adv = fgsm(modele, X_sub, y_sub, epsilon, critere)
         else:
             X_adv = pgd(modele, X_sub, y_sub, epsilon, alpha, nb_iter, critere)
 
-        # Application de la défense
         if type_defense == "Entraînement adversarial":
             modele_eval = modele_r
             X_eval = X_adv
@@ -337,7 +337,6 @@ if lancer:
         delta_acc = acc_adv - acc_ref
         delta_f1  = f1_adv  - f1_ref
 
-    # Résultats après attaque/défense
     label_section = f"Après attaque {type_attaque} (ε={epsilon})"
     if type_defense != "Aucune":
         label_section += f" + Défense : {type_defense}"
@@ -359,10 +358,8 @@ if lancer:
 
     st.divider()
 
-    # Graphiques
     col_left, col_right = st.columns(2)
 
-    # Comparaison des métriques
     with col_left:
         st.markdown("**Comparaison des métriques**")
         fig, ax = plt.subplots(figsize=(5, 3.5), facecolor="#0f172a")
@@ -387,7 +384,6 @@ if lancer:
         st.pyplot(fig)
         plt.close()
 
-    # Matrices de confusion côte à côte
     with col_right:
         st.markdown("**Matrice de confusion — après attaque**")
         fig, ax = plt.subplots(figsize=(4, 3.5), facecolor="#0f172a")
@@ -408,7 +404,6 @@ if lancer:
         st.pyplot(fig)
         plt.close()
 
-    # Courbe de dégradation selon epsilon
     st.divider()
     st.markdown("**Dégradation de la précision en fonction de ε**")
 
